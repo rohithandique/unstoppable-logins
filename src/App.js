@@ -1,14 +1,15 @@
-import NavBar from "./components/NavBar"
+import Home from "./Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Forum from "./Forum";
 
 function App() {
   return (
 
     <Router>
         <Routes>
-          <Route path="/" element={<NavBar />}>
+          <Route path="/" element={<Home />}>
           </Route>
-          <Route exact path="/callback" element={<>Hello</>}/>
+          <Route exact path="/forum" element={<Forum/>}/>
         </Routes>
     </Router>
   );

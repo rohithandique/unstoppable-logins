@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button, useColorModeValue } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import web3modal from '../helpers/web3modal';
+import udLogo from '../images/udLogo.png'
 
-export default function AuthButton() {
+export default function AuthButton(props) {
 
+    const {size} = props;
 
     const handleClick = async () => {
 
@@ -17,8 +19,16 @@ export default function AuthButton() {
     }
 
     return (
-    <Button onClick={()=>{handleClick()}} color={useColorModeValue("gray.800", "inherit")} size="sm">
-        Get Started
+    <Button color={'white'} leftIcon={<img style={{height: "20px"}} src={udLogo} alt='UD Logo'/>}
+    backgroundColor={'#4b47ee'}
+    _hover={{
+        bg: '#0b24b3'
+    }}
+    _active={{
+        bg: '#5361c7'
+    }}
+    onClick={()=>{handleClick()}} size={size}>
+        Login with Unstoppable
     </Button>
   
     );

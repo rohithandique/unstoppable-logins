@@ -2,11 +2,13 @@ import React from "react";
 import ToggleTheme from "../helpers/ToggleTheme";
 import AuthButton from "./AuthButton";
 import {
-  chakra, Box, Flex, useColorModeValue, VisuallyHidden, HStack, Button,
-  useDisclosure, VStack, IconButton, CloseButton,
+  chakra, Box, Flex, useColorModeValue, HStack, Button,
+  useDisclosure, VStack, IconButton, CloseButton, Link
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { Link as RouterLink } from "react-router-dom";
 
-export default function NavBar() {
+export default function Navbar() {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
 
@@ -21,17 +23,11 @@ export default function NavBar() {
       >
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <Flex>
-            <chakra.a
-              href="/"
-              title="Choc Home Page"
-              display="flex"
-              alignItems="center"
-            >
-              <VisuallyHidden>Choc</VisuallyHidden>
-            </chakra.a>
+            <Link as={RouterLink} to="/" style={{textDecoration: 'none'}}>
             <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-              Choc
+              UseName
             </chakra.h1>
+            </Link>
           </Flex>
           <HStack display="flex" alignItems="center" spacing={1}>
             <HStack
@@ -40,20 +36,28 @@ export default function NavBar() {
               color="brand.500"
               display={{ base: "none", md: "inline-flex" }}
             >
-              <Button variant="ghost">Features</Button>
-              <Button variant="ghost">Pricing</Button>
-              <Button variant="ghost">Blog</Button>
-              <Button variant="ghost">Company</Button>
-              <Button variant="ghost">Sign in</Button>
+              <Link href="https://unstoppabledomains.com/" isExternal style={{textDecoration: 'none'}}>
+                <Button variant="ghost">Domains</Button>
+              </Link>
+              <Link href="https://unstoppabledomains.com/learn" isExternal style={{textDecoration: 'none'}}>
+                <Button variant="ghost">Learn</Button>
+              </Link>
+              <Link href="https://unstoppabledomains.com/developers" isExternal style={{textDecoration: 'none'}}>
+                <Button variant="ghost">Build</Button>
+              </Link>
+              <Link href="https://unstoppabledomains.com/apps" isExternal style={{textDecoration: 'none'}}>
+                <Button variant="ghost">Applications</Button>
+              </Link>
               <ToggleTheme />
+              <AuthButton size="md"/>
             </HStack>
-            <AuthButton />
+            
             <Box display={{ base: "inline-flex", md: "none" }}>
               <IconButton
                 display={{ base: "flex", md: "none" }}
                 aria-label="Open menu"
                 fontSize="20px"
-                color={useColorModeValue("gray.800", "inherit")}
+                icon={<HamburgerIcon />}
                 variant="ghost"
                 onClick={mobileNav.onOpen}
               />
@@ -77,22 +81,20 @@ export default function NavBar() {
                   aria-label="Close menu"
                   onClick={mobileNav.onClose}
                 />
-
-                <Button w="full" variant="ghost">
-                  Features
-                </Button>
-                <Button w="full" variant="ghost">
-                  Pricing
-                </Button>
-                <Button w="full" variant="ghost">
-                  Blog
-                </Button>
-                <Button w="full" variant="ghost">
-                  Company
-                </Button>
-                <Button w="full" variant="ghost">
-                  Sign in
-                </Button>
+                <Link href="https://unstoppabledomains.com/" isExternal style={{textDecoration: 'none'}}>
+                  <Button w="full" variant="ghost">Domains</Button>
+                </Link>
+                <Link href="https://unstoppabledomains.com/learn" isExternal style={{textDecoration: 'none'}}>
+                  <Button w="full" variant="ghost">Learn</Button>
+                </Link>
+                <Link href="https://unstoppabledomains.com/developers" isExternal style={{textDecoration: 'none'}}>
+                  <Button w="full" variant="ghost">Build</Button>
+                </Link>
+                <Link href="https://unstoppabledomains.com/apps" isExternal style={{textDecoration: 'none'}}>
+                  <Button w="full" variant="ghost">Applications</Button>
+                </Link>
+                <AuthButton size="md"/>
+                <ToggleTheme />
               </VStack>
             </Box>
           </HStack>
