@@ -1,12 +1,13 @@
 import * as UAuthWeb3Modal from '@uauth/web3modal'
 import UAuthSPA from '@uauth/js'
+import WalletConnectProvider from '@walletconnect/web3-provider'
 import Web3Modal from 'web3modal'
 
 // These options are used to construct the UAuthSPA instance.
 export const uauthOptions = {
-  clientID: 'client_id',
-  clientSecret: 'client_secret',
-  redirectUri: 'http://localhost:3000',
+  clientID: '73I0uzMDPBH3aVvBl64YFKS5iOj88cuHd3ibH+hC/RE=',
+  clientSecret: '2uROcxrR6zXCJwmKQRlSJRmV3LhgNfEmeKGau4aoX8M=',
+  redirectUri: 'http://localhost:3000/callback',
 
   // Must include both the openid and wallet scopes.
   scope: 'openid wallet',
@@ -30,6 +31,14 @@ const providerOptions = {
 
     // The SPA libary options
     options: uauthOptions,
+  },
+
+  // For full functionality we include the walletconnect provider as well.
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      infuraId: 'f28db6224d0a4e9c9362a275c8ecdeca',
+    },
   },
 
   // Include any other web3modal providers here too...

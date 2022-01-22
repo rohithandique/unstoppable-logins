@@ -6,7 +6,7 @@ import {
   useDisclosure, VStack, IconButton, CloseButton,
 } from "@chakra-ui/react";
 
-export default function Gslr() {
+export default function NavBar() {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
 
