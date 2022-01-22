@@ -11,9 +11,9 @@ Website (WIP) - [https://unstoppable-logins.vercel.app/](https://unstoppable-log
 TODO
 
 ### Contact Info
-Discord ID - punneditji#6966
-Email ID - [rohit.handique.rh@gmail.com](mailto:rohit.handique.rh@gmail.com)
-Gitcoin - [rohithandique](https://gitcoin.co/rohithandique)
-Twitter - [@rohithandique_](https://twitter.com/rohithandique_)
+- Discord ID - punneditji#6966
+- Email ID - [rohit.handique.rh@gmail.com](mailto:rohit.handique.rh@gmail.com)
+- Gitcoin - [rohithandique](https://gitcoin.co/rohithandique)
+- Twitter - [@rohithandique_](https://twitter.com/rohithandique_)
 
 
