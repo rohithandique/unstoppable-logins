@@ -5,11 +5,11 @@ import Web3Modal from 'web3modal'
 // These options are used to construct the UAuthSPA instance.
 export const uauthOptions = {
   clientID: '73I0uzMDPBH3aVvBl64YFKS5iOj88cuHd3ibH+hC/RE=',
-  clientSecret: '2uROcxrR6zXCJwmKQRlSJRmV3LhgNfEmeKGau4aoX8M=',
-  redirectUri: 'https://unstoppable-logins.vercel.app/callback',
+  clientSecret: 'N2aNc2ocYisT1S+8GiHuqXSdctkhlMzRW4a7HQsqo04=',
+  redirectUri: 'http://localhost:3000/callback',
 
   // Must include both the openid and wallet scopes.
-  scope: 'openid wallet',
+  scope: 'openid wallet email',
 }
 
 const providerOptions = {

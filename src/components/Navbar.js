@@ -1,5 +1,4 @@
 import React from "react";
-import ToggleTheme from "../helpers/ToggleTheme";
 import AuthButton from "./AuthButton";
 import {
   chakra, Box, Flex, useColorModeValue, HStack, Button,
@@ -48,7 +47,6 @@ export default function Navbar() {
               <Link href="https://unstoppabledomains.com/apps" isExternal style={{textDecoration: 'none'}}>
                 <Button variant="ghost">Applications</Button>
               </Link>
-              <ToggleTheme />
               <AuthButton size="md"/>
             </HStack>
             
@@ -94,7 +92,6 @@ export default function Navbar() {
                   <Button w="full" variant="ghost">Applications</Button>
                 </Link>
                 <AuthButton size="md"/>
-                <ToggleTheme />
               </VStack>
             </Box>
           </HStack>

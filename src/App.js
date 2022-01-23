@@ -1,5 +1,5 @@
 import Home from "./Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Forum from "./Forum";
 
 function App() {
@@ -7,10 +7,10 @@ function App() {
 
     <Router>
         <Routes>
-          <Route path="/" element={<Home />}>
-          </Route>
-          <Route exact path="/forum" element={<Forum/>}/>
-        </Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/forum" element={<Forum/>}/>
+          <Route path="/callback" element={<Navigate replace to="/forum" />} />        
+          </Routes>
     </Router>
   );
 }

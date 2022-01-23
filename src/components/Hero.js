@@ -50,9 +50,8 @@ const Hero = () => {
           justifyContent={{ sm: "left", md: "center" }}
         >
           <AuthButton size="lg"/>
-          <Link as={RouterLink} to="/forum" style={{textDecoration: 'none'}}>
+          <Link as={RouterLink} to="/callback" style={{textDecoration: 'none'}}>
             <Button
-              as="a"
               colorScheme="gray"
               display="inline-flex"
               alignItems="center"
