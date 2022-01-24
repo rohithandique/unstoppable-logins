@@ -2,14 +2,17 @@ import React from "react";
 import AuthButton from "./AuthButton";
 import {
   chakra, Box, Flex, useColorModeValue, HStack, Button,
-  useDisclosure, VStack, IconButton, CloseButton, Link
+  useDisclosure, VStack, IconButton, CloseButton, Link, Image
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
+import Logo from "../images/blockchain.png"
 
 export default function Navbar() {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
+
+  console.log(Logo)
 
   return (
     <React.Fragment>
@@ -23,9 +26,12 @@ export default function Navbar() {
         <Flex alignItems="center" justifyContent="space-between" mx="auto">
           <Flex>
             <Link as={RouterLink} to="/" style={{textDecoration: 'none'}}>
-            <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
-              UseName
-            </chakra.h1>
+              <Image src={Logo} h="30px"/>
+            </Link>
+            <Link as={RouterLink} to="/" style={{textDecoration: 'none'}}>
+              <chakra.h1 fontSize="xl" fontWeight="medium" ml="2">
+                UseName
+              </chakra.h1>
             </Link>
           </Flex>
           <HStack display="flex" alignItems="center" spacing={1}>
