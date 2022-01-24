@@ -77,6 +77,7 @@ export default function Navbar() {
                 spacing={3}
                 rounded="sm"
                 shadow="sm"
+                zIndex={1}
               >
                 <CloseButton
                   aria-label="Close menu"

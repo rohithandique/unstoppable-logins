@@ -9,11 +9,11 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 
     const [user, setUser] = useState(undefined)
-
+    const [count, setCount] = useState(0)
 
     const value = {
-        user,
-        setUser
+        user, setUser,
+        count, setCount
     }
 
     return (

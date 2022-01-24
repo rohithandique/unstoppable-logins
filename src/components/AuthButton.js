@@ -1,13 +1,23 @@
 import React, { useState, useEffect} from 'react';
-import { Button, Menu, MenuButton, MenuList, MenuItem, Box } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuList, MenuItem, Box,
+    Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
+    ModalBody, ModalCloseButton, useDisclosure
+} from '@chakra-ui/react';
 import udLogo from '../images/udLogo.png'
 import UAuth from '@uauth/js';
 import { useNavigate } from "react-router-dom";
 import { ArrowDownIcon } from '@chakra-ui/icons';
 import { useAuth } from "../contexts/AuthContext";
+import Profile from './Profile';
 
 export default function AuthButton(props) {
+
     const {size} = props;
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
+    const {user, setUser} = useAuth()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     let navigate = useNavigate();
 
     const uauth = new UAuth({
@@ -18,12 +28,6 @@ export default function AuthButton(props) {
         // Must include both the openid and wallet scopes.
         scope: 'openid wallet email',
     })
-
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState()
-    const {user, setUser} = useAuth()
-
-    console.log("hello")
    
     useEffect(() => {
       setLoading(true)
@@ -32,7 +36,7 @@ export default function AuthButton(props) {
         .then(setUser)
         .catch(() => {})
         .finally(() => setLoading(false))
-    }, [setUser])
+    }, [setUser]) // eslint-disable-line
 
     const handleLogin = () => {
         if(user) return;
@@ -64,13 +68,16 @@ export default function AuthButton(props) {
         .finally(() => setLoading(false))
     }
 
+    
+
     return (
 
         <>
-            { user ?
+            { 
+            user ?
             <Box>
-                <Menu style={{ margin: 0 }}>
-                    <MenuButton style={{ margin: 0 }}
+                <Menu>
+                    <MenuButton
                     as={Button}
                     color={'white'} 
                     backgroundColor={'#4b47ee'}
@@ -83,15 +90,30 @@ export default function AuthButton(props) {
                     size={size}
                     isLoading={loading}>
                     {user.sub}
-                    <ArrowDownIcon style={{ margin: 0 }}/>
+                    <ArrowDownIcon/>
                     </MenuButton>
-                    <MenuList style={{ margin: 0 }}>
-                        <MenuItem style={{ margin: 0 }}
-                        onClick={() => {handleLogout()}}>Log Out</MenuItem>
+                    <MenuList>
+                        <MenuItem onClick={onOpen}>Profile</MenuItem>
+                        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                            <ModalOverlay />
+                            <ModalContent>
+                            <ModalHeader>Profile</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <Profile />
+                            </ModalBody>
+
+                            <ModalFooter>
+
+                            </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+                        <MenuItem onClick={() => {handleLogout()}}>
+                            Log Out
+                        </MenuItem>
                     </MenuList>
                 </Menu>
             </Box>
-            
             :
             <Button s={Button}color={'white'} leftIcon={<img style={{height: "20px"}} src={udLogo} alt='UD Logo'/>}
             backgroundColor={'#4b47ee'}
@@ -107,8 +129,6 @@ export default function AuthButton(props) {
             </Button>
             }
         </>
-        
-        
   
     );
 }
