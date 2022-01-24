@@ -35,6 +35,9 @@ export default function Navbar() {
               color="brand.500"
               display={{ base: "none", md: "inline-flex" }}
             >
+              <Link as={RouterLink} to="/forum" style={{textDecoration: 'none'}}>
+                <Button variant="ghost">Forums</Button>
+              </Link>
               <Link href="https://unstoppabledomains.com/" isExternal style={{textDecoration: 'none'}}>
                 <Button variant="ghost">Domains</Button>
               </Link>
