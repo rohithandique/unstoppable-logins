@@ -1,17 +1,16 @@
 import React, { useState, useEffect} from 'react';
-import { Button } from '@chakra-ui/react';
-import web3modal from '../helpers/web3modal';
+import { Button, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import udLogo from '../images/udLogo.png'
 import UAuth from '@uauth/js';
-import { ethers } from "ethers";
 import { useNavigate } from "react-router-dom";
-
+import { ArrowDownIcon } from '@chakra-ui/icons';
+import { useAuth } from "../contexts/AuthContext";
 
 export default function AuthButton(props) {
     const {size} = props;
+    let navigate = useNavigate();
 
-    /*let navigate = useNavigate();
-
+    /*
     const {default: Resolution} = require('@unstoppabledomains/resolution');
     const resolution = new Resolution();
 
@@ -33,12 +32,14 @@ export default function AuthButton(props) {
             const provider = new ethers.providers.Web3Provider(instance);
             const signer = provider.getSigner();
             console.log(await signer.getAddress())
-            navigate("/forum", { replace: false });
+            
             
         } catch(err) {
             console.log(err)
         }
     }*/
+
+    
 
     const uauth = new UAuth({
         clientID: '73I0uzMDPBH3aVvBl64YFKS5iOj88cuHd3ibH+hC/RE=',
@@ -51,10 +52,9 @@ export default function AuthButton(props) {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
-    const [user, setUser] = useState()
-  
-    console.log(user)
+    const {user, setUser} = useAuth()
 
+   
     useEffect(() => {
       setLoading(true)
       uauth
@@ -63,42 +63,76 @@ export default function AuthButton(props) {
         .catch(() => {})
         .finally(() => setLoading(false))
     }, [])
-  
-      const handleLogin = () => {
-      setLoading(true)
-      uauth
+
+    const handleLogin = () => {
+        if(user) return;
+        setLoading(true)
+        uauth
         .loginWithPopup()
-        .then(() => uauth.user().then(setUser))
-        .catch(setError)
-        .finally(() => setLoading(false))
-      }
+        .then(() => {
+            uauth.user().then(setUser)
+            navigate("/forum", { replace: false });
+        })
+        .catch((err)=> {
+            setError(err)
+            console.log(error)
+        })
+        .finally(() => {
+            setLoading(false);
+        })
+    }
   
-      const handleLogout = () => {
-          setLoading(true)
-          uauth
-            .logout()
-            .then(() => setUser(undefined))
-            .catch(setError)
-            .finally(() => setLoading(false))
-      }
-
-
-
-
-
+    const handleLogout = () => {
+        setLoading(true)
+        uauth
+        .logout()
+        .then(() => setUser(undefined))
+        .catch((err)=> {
+            setError(err)
+            console.log(error)
+        })
+        .finally(() => setLoading(false))
+    }
 
     return (
-    <Button color={'white'} leftIcon={<img style={{height: "20px"}} src={udLogo} alt='UD Logo'/>}
-    backgroundColor={'#4b47ee'}
-    _hover={{
-        bg: '#0b24b3'
-    }}
-    _active={{
-        bg: '#5361c7'
-    }}
-    onClick={()=>{handleLogin()}} size={size}>
-        Login with Unstoppable
-    </Button>
+
+        <>
+            { user ?
+            <Menu>
+                <MenuButton as={Button}color={'white'} leftIcon={<img style={{height: "20px"}} src={udLogo} alt='UD Logo'/>}
+                backgroundColor={'#4b47ee'}
+                _hover={{
+                    bg: '#0b24b3'
+                }}
+                _active={{
+                    bg: '#5361c7'
+                }}
+                onClick={()=>{handleLogin()}} size={size}
+                isLoading={loading}>
+                {user.sub}
+                <ArrowDownIcon ml="2"/>
+                </MenuButton>
+                <MenuList>
+                    <MenuItem onClick={() => {handleLogout()}}>Log Out</MenuItem>
+                </MenuList>
+            </Menu>
+            :
+            <Button s={Button}color={'white'} leftIcon={<img style={{height: "20px"}} src={udLogo} alt='UD Logo'/>}
+            backgroundColor={'#4b47ee'}
+            _hover={{
+                bg: '#0b24b3'
+            }}
+            _active={{
+                bg: '#5361c7'
+            }}
+            onClick={()=>{handleLogin()}} size={size}
+            isLoading={loading}>
+                Login with Unstoppable
+            </Button>
+            }
+        </>
+        
+        
   
     );
 }
