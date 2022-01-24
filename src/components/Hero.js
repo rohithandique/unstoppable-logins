@@ -5,6 +5,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons"; 
 import { Link as RouterLink } from "react-router-dom";
+import HeroPic from "../images/hero.png"
 
 const Hero = () => {
   return (
@@ -78,7 +79,7 @@ const Hero = () => {
           w="full"
           rounded="lg"
           shadow="2xl"
-          src="https://kutty.netlify.app/hero.jpg"
+          src={HeroPic}
           alt="Hellonext feedback boards software screenshot"
         />
       </Box>
