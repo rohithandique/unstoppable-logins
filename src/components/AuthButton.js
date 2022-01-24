@@ -23,7 +23,7 @@ export default function AuthButton(props) {
     const uauth = new UAuth({
         clientID: '73I0uzMDPBH3aVvBl64YFKS5iOj88cuHd3ibH+hC/RE=',
         clientSecret: 'N2aNc2ocYisT1S+8GiHuqXSdctkhlMzRW4a7HQsqo04=',
-        redirectUri: 'http://localhost:3000/callback',
+        redirectUri: 'https://unstoppable-logins.vercel.app/callback',
       
         // Must include both the openid and wallet scopes.
         scope: 'openid wallet email',
