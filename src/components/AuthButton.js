@@ -26,7 +26,7 @@ export default function AuthButton(props) {
         redirectUri: 'https://unstoppable-logins.vercel.app/callback',
       
         // Must include both the openid and wallet scopes.
-        scope: 'openid wallet email',
+        scope: 'openid wallet email:optional',
     })
    
     useEffect(() => {

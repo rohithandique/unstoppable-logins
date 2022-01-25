@@ -66,7 +66,6 @@ const Hero = () => {
               Go To Forums
             </Button>
           </Link>
-          
         </Stack>
       </Box>
       <Box
